@@ -43,7 +43,6 @@ void displayRoleMenu() {
         scanf("%d", &roleChoice);
         while (getchar() != '\n');
     } while (roleChoice < 1 || roleChoice > 2);
-system(cls);
     int choice;
     do {
      printf("\n***Student Management System Using C***\n");
@@ -183,7 +182,7 @@ void userGuideline() {
     printf("\nUser Guideline:\n");
     printf("1. Use option 1 to add a new user.\n");
     printf("2. Use option 2 to view all users.\n");
-    printf("3. Use option 3 to view a specific user’s details.\n");
+    printf("3. Use option 3 to view a specific userâ€™s details.\n");
     printf("4. Use option 4 to lock/unlock users.\n");
     printf("5. Follow on-screen instructions for seamless navigation.\n");
 }

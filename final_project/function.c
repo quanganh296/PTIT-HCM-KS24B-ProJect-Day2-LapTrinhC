@@ -31,7 +31,7 @@ void loadUsersFromFile() {
 }
 void displayRoleMenu() {
     int roleChoice;
-    do {
+    do { system("cls");
           printf("\n***Bank Management System Using C***\n");
         printf("\n%9sCHOOSE YOUR ROLE\n","");
         printf("%5s========================\n");
@@ -42,9 +42,10 @@ void displayRoleMenu() {
         printf("%5sEnter The Choice: ");
         scanf("%d", &roleChoice);
         while (getchar() != '\n');
+         
     } while (roleChoice < 1 || roleChoice > 2);
     int choice;
-    do {
+    do {   system("cls");
      printf("\n***Student Management System Using C***\n");
         printf("\n%15sMENU\n","");
         printf("%8s========================\n");
@@ -59,7 +60,7 @@ void displayRoleMenu() {
         printf("%8sEnter The Choice: ");
         scanf("%d", &choice);
         while (getchar() != '\n');
-        
+       
         switch (choice) {
             case 1:
                 addUser();
@@ -100,10 +101,10 @@ void displayUsers() {
         }
         printf("========================================================================================\n");
 
-      
+       
         printf("Go back(b)? or Exit(0)?: ");
         scanf(" %c", &choice);
-        while (getchar() != '\n');
+        while (getchar() != '\n'); 
 
         if (choice == '0') {
             exit(0);
@@ -120,15 +121,17 @@ int userExists(const char *userId) {
 }
 
 void addUser() {
+	int choice;
     if (userCount >= MAX_USERS) {
         printf("User list is full!\n");
         return;
     }
-
+do{
     User newUser;
     printf("Enter ID: ");
     fgets(newUser.userId, sizeof(newUser.userId), stdin);
-    newUser.userId[strcspn(newUser.userId, "\n")] = '\0';
+    newUser.userId[strcspn(newUser.userId, "\n")] = 0; 
+
     if (userExists(newUser.userId)) {
         printf("User ID already exists!\n");
         return;
@@ -137,58 +140,95 @@ void addUser() {
     printf("Enter Name: ");
     fflush(stdin);
     fgets(newUser.name, sizeof(newUser.name), stdin);
-    newUser.name[strcspn(newUser.name, "\n")] = '\0'; 
+    newUser.name[strcspn(newUser.name, "\n")] = 0; // Xóa '\n'
 
     printf("Enter Phone: ");
-     fflush(stdin);
+    fflush(stdin);
     fgets(newUser.phone, sizeof(newUser.phone), stdin);
-    newUser.phone[strcspn(newUser.phone, "\n")] = '\0'; 
+    newUser.phone[strcspn(newUser.phone, "\n")] = 0; // Xóa '\n'
 
     printf("Enter Email: ");
-     fflush(stdin);
+    fflush(stdin);
     fgets(newUser.email, sizeof(newUser.email), stdin);
-    newUser.email[strcspn(newUser.email, "\n")] = '\0'; 
+    newUser.email[strcspn(newUser.email, "\n")] = 0; // Xóa '\n'
 
     printf("Enter Date of Birth (DD MM YYYY): ");
-     fflush(stdin);
+    fflush(stdin);
     scanf("%d %d %d", &newUser.dateOfBirth.day, &newUser.dateOfBirth.month, &newUser.dateOfBirth.year);
-    while (getchar() != '\n'); 
+    while (getchar() != '\n'); // Xóa b? d?m d?u vào sau scanf()
 
     users[userCount++] = newUser;
     saveUsersToFile();
     printf("User added successfully!\n");
+
+
+        printf("Press 'm' to go back to the main menu: ");
+        scanf(" %c", &choice);
+    } while (choice != 'm'); 
 }
-
-
-
 void toggleUserStatus() {
-    char userId[10];
-    printf("Enter User ID to lock/unlock: ");
-    fgets(userId, sizeof(userId), stdin);
-    userId[strcspn(userId, "\n")] = 0;
+    char choice;
+    do {
+        system("cls");
+        char userId[20];
+        printf("Enter User ID to Lock/Unlock: ");
+        fgets(userId, sizeof(userId), stdin);
+        userId[strcspn(userId, "\n")] = 0;
 
-    for (int i = 0; i < userCount; i++) {
-        if (strcmp(users[i].userId, userId) == 0) {
-            users[i].isLocked = !users[i].isLocked;
-            printf("User %s is now %s\n", users[i].name, users[i].isLocked ? "Locked" : "Unlocked");
-            saveUsersToFile();
-            return;
+        for (int i = 0; i < userCount; i++) {
+            if (strcmp(users[i].userId, userId) == 0) {
+                users[i].status = !users[i].status;
+                saveUsersToFile();
+                printf("User %s is now %s\n", userId, users[i].status ? "Locked" : "Unlocked");
+                break;
+            }
         }
-    }
-    printf("User ID not found!\n");
+
+        printf("Press 'm' to go back to the main menu: ");
+        scanf(" %c", &choice);
+    } while (choice != 'm');
 }
+
 void userGuideline() {
+int choice;
+do{
+
     printf("\nUser Guideline:\n");
     printf("1. Use option 1 to add a new user.\n");
     printf("2. Use option 2 to view all users.\n");
-    printf("3. Use option 3 to view a specific userâ€™s details.\n");
+    printf("3. Use option 3 to view a specific user’s details.\n");
     printf("4. Use option 4 to lock/unlock users.\n");
     printf("5. Follow on-screen instructions for seamless navigation.\n");
+    printf("========================================================================================\n");
+
+       
+        printf("Go back(b)? or Exit(0)?: ");
+        scanf(" %c", &choice);
+        while (getchar() != '\n'); 
+
+        if (choice == '0') {
+            exit(0);
+        }
+    } while (choice != 'b');
 }
 void aboutUs() {
+int choice;
+do{
+
     printf("\nAbout Us:\n");
-    printf("This is a simple user management system developed in C.\n");
+    printf("This is a program make by Nguyen Quang Anh with C language.\n");
     printf("It allows user registration, viewing details, and managing access.\n");
+    printf("========================================================================================\n");
+
+       
+        printf("Go back(b)? or Exit(0)?: ");
+        scanf(" %c", &choice);
+        while (getchar() != '\n'); 
+
+        if (choice == '0') {
+            exit(0);
+        }
+    } while (choice != 'b');
 }
 void showUserDetail() {
     char userId[10];
@@ -213,4 +253,8 @@ void showUserDetail() {
     if (!found) {
         printf("User ID not found!\n");
     }
+}
+
+void transaction(){
+	
 }

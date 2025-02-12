@@ -100,10 +100,10 @@ void displayUsers() {
         }
         printf("========================================================================================\n");
 
-        // Keep prompting until 'b' or '0' is entered
+      
         printf("Go back(b)? or Exit(0)?: ");
         scanf(" %c", &choice);
-        while (getchar() != '\n'); // Clear input buffer
+        while (getchar() != '\n');
 
         if (choice == '0') {
             exit(0);
@@ -128,8 +128,7 @@ void addUser() {
     User newUser;
     printf("Enter ID: ");
     fgets(newUser.userId, sizeof(newUser.userId), stdin);
-    newUser.userId[strcspn(newUser.userId, "\n")] = '\0'; // Remove newline
-
+    newUser.userId[strcspn(newUser.userId, "\n")] = '\0';
     if (userExists(newUser.userId)) {
         printf("User ID already exists!\n");
         return;
@@ -138,17 +137,17 @@ void addUser() {
     printf("Enter Name: ");
     fflush(stdin);
     fgets(newUser.name, sizeof(newUser.name), stdin);
-    newUser.name[strcspn(newUser.name, "\n")] = '\0'; // Remove newline
+    newUser.name[strcspn(newUser.name, "\n")] = '\0'; 
 
     printf("Enter Phone: ");
      fflush(stdin);
     fgets(newUser.phone, sizeof(newUser.phone), stdin);
-    newUser.phone[strcspn(newUser.phone, "\n")] = '\0'; // Remove newline
+    newUser.phone[strcspn(newUser.phone, "\n")] = '\0'; 
 
     printf("Enter Email: ");
      fflush(stdin);
     fgets(newUser.email, sizeof(newUser.email), stdin);
-    newUser.email[strcspn(newUser.email, "\n")] = '\0'; // Remove newline
+    newUser.email[strcspn(newUser.email, "\n")] = '\0'; 
 
     printf("Enter Date of Birth (DD MM YYYY): ");
      fflush(stdin);
